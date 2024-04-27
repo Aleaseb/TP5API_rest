@@ -38,7 +38,6 @@ INSERT INTO rank (name) VALUES
 	('Diamond');
 
 CREATE TABLE player_stats (
-    /*UUID	SERIAL	PRIMARY KEY,*/
     user_uuid	uuid	REFERENCES users(UUID)  PRIMARY KEY,
     rank_uuid	uuid	REFERENCES rank(UUID),
     kill	INTEGER	NOT NULL,
@@ -51,4 +50,29 @@ INSERT INTO player_stats (user_uuid, kill, death, rank_uuid) VALUES
 	((SELECT UUID FROM users WHERE username = 'Virginie'), 10, 10, (SELECT UUID FROM rank WHERE name = 'Gold')),
 	((SELECT UUID FROM users WHERE username = 'Mathieu'), -5, -10, (SELECT UUID FROM rank WHERE name = 'Platinium')),
 	((SELECT UUID FROM users WHERE username = 'Sebastien'), 500000, 0, (SELECT UUID FROM rank WHERE name = 'Copper'));
-	
+
+
+
+CREATE TABLE player_state (
+    user_uuid	uuid	REFERENCES users(UUID)  PRIMARY KEY,
+    player_type TEXT    CHECK (player_type IN ('Server', 'Client')),
+    is_in_game  boolean DEFAULT FALSE   NOT NULL, 
+    map_name    TEXT,
+    friends uuid[],
+    CONSTRAINT valid_in_game CHECK (
+        (is_in_game = FALSE AND map_name IS NULL) OR
+        (is_in_game = TRUE AND map_name IS NOT NULL)
+    )
+);
+INSERT INTO player_state (user_uuid, player_type, is_in_game, map_name, friends) VALUES
+    ((SELECT UUID FROM users WHERE username = 'Julien'), 'Server', TRUE, 'YuGiOh', NULL),
+    ((SELECT UUID FROM users WHERE username = 'Samuel'), 'Client', TRUE, 'Baldur', NULL), 
+	((SELECT UUID FROM users WHERE username = 'Thomas'), 'Client', FALSE, NULL, NULL),
+	((SELECT UUID FROM users WHERE username = 'Virginie'), 'Client', FALSE, NULL, ARRAY[(SELECT UUID FROM users WHERE username = 'Julien')]),
+	((SELECT UUID FROM users WHERE username = 'Mathieu'), 'Client', TRUE, 'Noita', ARRAY[(SELECT UUID FROM users WHERE username = 'Samuel')]),
+	((SELECT UUID FROM users WHERE username = 'Sebastien'), 'Client', TRUE, 'Magic', NULL);
+
+--UPDATE player_state
+--SET friends = array_append(friends, (SELECT UUID FROM users WHERE username = 'Julien'))
+--WHERE user_uuid = (SELECT UUID FROM users WHERE username = 'Sebastien')
+
