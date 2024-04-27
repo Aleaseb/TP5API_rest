@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{354885DA-1759-4263-A67D-87E9DD6DBBBA}|ChepoAPI\\ChepoAPI.csproj|c:\\users\\samue\\onedrive\\bureau\\cours\\uqac\\tp5api_rest\\api\\chepoapi\\chepoapi\\controllers\\rankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{354885DA-1759-4263-A67D-87E9DD6DBBBA}|ChepoAPI\\ChepoAPI.csproj|solutionrelative:chepoapi\\controllers\\rankcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{354885DA-1759-4263-A67D-87E9DD6DBBBA}|ChepoAPI\\ChepoAPI.csproj|c:\\users\\samue\\onedrive\\bureau\\cours\\uqac\\tp5api_rest\\api\\chepoapi\\chepoapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{354885DA-1759-4263-A67D-87E9DD6DBBBA}|ChepoAPI\\ChepoAPI.csproj|solutionrelative:chepoapi\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -86,19 +90,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "RankController.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Controllers\\RankController.cs",
+              "RelativeDocumentMoniker": "ChepoAPI\\Controllers\\RankController.cs",
+              "ToolTip": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Controllers\\RankController.cs",
+              "RelativeToolTip": "ChepoAPI\\Controllers\\RankController.cs",
+              "ViewState": "AQIAACYAAAAAAAAAAAAwwEAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T23:33:44.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "UserController.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\Controllers\\UserController.cs",
               "ToolTip": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Controllers\\UserController.cs",
               "RelativeToolTip": "ChepoAPI\\Controllers\\UserController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABUAAAAAAAAA",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAACYAAAAYAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-27T23:08:43.341Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "PostgreDbContext.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\PostgreDbContext.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\PostgreDbContext.cs",
@@ -106,12 +123,11 @@
               "RelativeToolTip": "ChepoAPI\\PostgreDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T21:56:25.114Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T21:56:25.114Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "RankData.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\RankData.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\RankData.cs",
@@ -119,12 +135,11 @@
               "RelativeToolTip": "ChepoAPI\\RankData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T20:14:14.783Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T20:14:14.783Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Program.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\Program.cs",
@@ -132,12 +147,11 @@
               "RelativeToolTip": "ChepoAPI\\Program.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T19:22:51.915Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T19:22:51.915Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\appsettings.json",
               "RelativeDocumentMoniker": "ChepoAPI\\appsettings.json",
@@ -145,12 +159,11 @@
               "RelativeToolTip": "ChepoAPI\\appsettings.json",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAtAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-04-27T19:35:00.448Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T19:35:00.448Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UsersData.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\UsersData.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\UsersData.cs",
@@ -158,12 +171,11 @@
               "RelativeToolTip": "ChepoAPI\\UsersData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T20:05:52.789Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T20:05:52.789Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SuccessData.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\SuccessData.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\SuccessData.cs",
@@ -171,12 +183,11 @@
               "RelativeToolTip": "ChepoAPI\\SuccessData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAATAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T20:10:28.519Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T20:10:28.519Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "PlayerStatsData.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\PlayerStatsData.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\PlayerStatsData.cs",
@@ -184,12 +195,11 @@
               "RelativeToolTip": "ChepoAPI\\PlayerStatsData.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAmAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T20:12:34.254Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T20:12:34.254Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "20240427224013_ChepoMigration.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Migrations\\20240427224013_ChepoMigration.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\Migrations\\20240427224013_ChepoMigration.cs",
@@ -197,12 +207,11 @@
               "RelativeToolTip": "ChepoAPI\\Migrations\\20240427224013_ChepoMigration.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T22:40:16.775Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T22:40:16.775Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Views\\User\\Create.cshtml",
               "RelativeDocumentMoniker": "ChepoAPI\\Views\\User\\Create.cshtml",
@@ -210,12 +219,11 @@
               "RelativeToolTip": "ChepoAPI\\Views\\User\\Create.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-27T23:07:55.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T23:07:55.762Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Views\\User\\Index.cshtml",
               "RelativeDocumentMoniker": "ChepoAPI\\Views\\User\\Index.cshtml",
@@ -223,12 +231,11 @@
               "RelativeToolTip": "ChepoAPI\\Views\\User\\Index.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-04-27T23:07:56.887Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T23:07:56.887Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\Controllers\\WeatherForecastController.cs",
@@ -236,12 +243,11 @@
               "RelativeToolTip": "ChepoAPI\\Controllers\\WeatherForecastController.cs",
               "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAAAIAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-27T19:22:43.126Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-27T19:22:43.126Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "PostgreDbContextModelSnapshot.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Migrations\\PostgreDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\Migrations\\PostgreDbContextModelSnapshot.cs",
@@ -253,7 +259,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "WeatherForecast.cs",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\WeatherForecast.cs",
               "RelativeDocumentMoniker": "ChepoAPI\\WeatherForecast.cs",
@@ -265,7 +271,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\Dockerfile",
               "RelativeDocumentMoniker": "ChepoAPI\\Dockerfile",
@@ -277,7 +283,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Microsoft.NET.TargetFrameworkInference.targets",
               "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\7.0.401\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
               "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\..\\..\\..\\..\\Program Files\\dotnet\\sdk\\7.0.401\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.TargetFrameworkInference.targets",
@@ -288,7 +294,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "ChepoAPI",
               "DocumentMoniker": "C:\\Users\\samue\\OneDrive\\Bureau\\Cours\\UQAC\\TP5API_rest\\API\\ChepoAPI\\ChepoAPI\\ChepoAPI.csproj",
               "RelativeDocumentMoniker": "ChepoAPI\\ChepoAPI.csproj",

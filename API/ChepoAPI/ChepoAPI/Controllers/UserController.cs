@@ -20,7 +20,6 @@ namespace ChepoAPI.Controllers
             _context = context;
         }
 
-        // GET: Users
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<UsersData>>> GetUsers()
         {
