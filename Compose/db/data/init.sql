@@ -52,9 +52,9 @@ INSERT INTO ranks (name) VALUES
 
 CREATE TABLE player_stats (
     user_uuid	uuid	REFERENCES users(UUID)  PRIMARY KEY,
-    rank_uuid	uuid	REFERENCES ranks(UUID),
-    kill	INTEGER	NOT NULL,
-    death	INTEGER	NOT NULL
+    rank_uuid	uuid	REFERENCES ranks(UUID)  NOT NULL,
+    kill	INTEGER DEFAULT 0	NOT NULL,
+    death	INTEGER DEFAULT 0   NOT NULL
 );
 INSERT INTO player_stats (user_uuid, kill, death, rank_uuid) VALUES
     ((SELECT UUID FROM users WHERE username = 'Julien'), 0, 0, (SELECT UUID FROM ranks WHERE name = 'Diamond')),
@@ -97,7 +97,7 @@ INSERT INTO player_state (user_uuid, is_in_game, map_name, server_uuid, friends)
 
 	((SELECT UUID FROM users WHERE username = 'Mathieu'), 
             TRUE, 'Noita', (SELECT UUID FROM servers WHERE name = 'Server2'),   -- game
-            ARRAY[(SELECT UUID FROM users WHERE username = 'Samuel')]), -- friends
+            ARRAY[(SELECT UUID FROM users WHERE username = 'Samuel'), (SELECT UUID FROM users WHERE username = 'Sebastien')]), -- friends
 
 	((SELECT UUID FROM users WHERE username = 'Sebastien'), 
             TRUE, 'Magic', (SELECT UUID FROM servers WHERE name = 'Server2'),   -- game
