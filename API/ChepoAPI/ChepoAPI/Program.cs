@@ -1,3 +1,7 @@
+using ChepoAPI;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +10,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+var Configuration = builder.Configuration;
+builder.Services.AddDbContext<PostgreDbContext>(options =>
+        options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
