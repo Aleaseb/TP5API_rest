@@ -13,7 +13,8 @@ services:
       - ./db/data:/docker-entrypoint-initdb.d
 
   pgadmin:
-    image: dpage/pgadmin4:latest
+    #image: dpage/pgadmin4:latest
+    build: ./pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: user@user.com
       PGADMIN_DEFAULT_PASSWORD: user
@@ -28,3 +29,5 @@ services:
 
   redis:
     build: ./redis
+    ports:
+      - "6379:6379"
