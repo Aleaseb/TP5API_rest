@@ -81,27 +81,27 @@ CREATE TABLE player_state (
 INSERT INTO player_state (user_uuid, is_in_game, map_name, server_uuid, friends) VALUES
     ((SELECT UUID FROM users WHERE username = 'Julien'),   
             TRUE, 'YuGiOh', (SELECT UUID FROM servers WHERE name = 'Server1'),  -- game
-            NULL),  -- server
+            NULL),  -- friends
 
     ((SELECT UUID FROM users WHERE username = 'Samuel'), 
             TRUE, 'Baldur', (SELECT UUID FROM servers WHERE name = 'Server1'),  -- game
-            NULL),  -- server
+            NULL),  -- friends
 
 	((SELECT UUID FROM users WHERE username = 'Thomas'), 
             FALSE, NULL, NULL,  -- game
-            NULL),  -- server
+            NULL),  -- friends
 
 	((SELECT UUID FROM users WHERE username = 'Virginie'), 
             FALSE, NULL, NULL,  -- game
-            ARRAY[(SELECT UUID FROM users WHERE username = 'Julien')]), -- server
-            
+            ARRAY[(SELECT UUID FROM users WHERE username = 'Julien')]), -- friends
+
 	((SELECT UUID FROM users WHERE username = 'Mathieu'), 
             TRUE, 'Noita', (SELECT UUID FROM servers WHERE name = 'Server2'),   -- game
-            ARRAY[(SELECT UUID FROM users WHERE username = 'Samuel')]), -- server
+            ARRAY[(SELECT UUID FROM users WHERE username = 'Samuel')]), -- friends
 
 	((SELECT UUID FROM users WHERE username = 'Sebastien'), 
             TRUE, 'Magic', (SELECT UUID FROM servers WHERE name = 'Server2'),   -- game
-            NULL);  -- server
+            NULL);  -- friends
 
 
 --UPDATE player_state
