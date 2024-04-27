@@ -49,5 +49,6 @@ INSERT INTO player_stats (user_uuid, kill, death, rank_uuid) VALUES
 	((SELECT UUID FROM users WHERE username = 'Samuel'), -1, 2, (SELECT UUID FROM rank WHERE name = 'Bronze')),
 	((SELECT UUID FROM users WHERE username = 'Thomas'), 15, 20, (SELECT UUID FROM rank WHERE name = 'Silver')),
 	((SELECT UUID FROM users WHERE username = 'Virginie'), 10, 10, (SELECT UUID FROM rank WHERE name = 'Gold')),
-	((SELECT UUID FROM users WHERE username = 'Mathieu'), -5, -10, (SELECT UUID FROM rank WHERE name = 'Copper'));
+	((SELECT UUID FROM users WHERE username = 'Mathieu'), -5, -10, (SELECT UUID FROM rank WHERE name = 'Platinium')),
+	((SELECT UUID FROM users WHERE username = 'Sebastien'), 500000, 0, (SELECT UUID FROM rank WHERE name = 'Copper'));
 	
