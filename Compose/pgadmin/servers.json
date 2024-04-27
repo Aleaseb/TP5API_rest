@@ -1,0 +1,13 @@
+{
+	"Servers": {
+		"1": {
+			"Name": "SuperUserOfTheDead",
+			"Group": "Servers",
+			"Port": 5432,
+			"Username": "user",
+			"Host": "host.docker.internal",
+			"SSLMode": "prefer",
+			"MaintenanceDB": "postgres"
+		}	
+	}
+}
