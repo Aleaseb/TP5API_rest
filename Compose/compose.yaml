@@ -14,7 +14,6 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4:latest
-    #build: ./db
     environment:
       PGADMIN_DEFAULT_EMAIL: user@user.com
       PGADMIN_DEFAULT_PASSWORD: user
@@ -26,3 +25,6 @@ services:
       - ./pgadmin/servers.json:/pgadmin4/servers.json
     depends_on:
       - db
+
+  redis:
+    build: ./redis
