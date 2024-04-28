@@ -9,7 +9,7 @@ namespace ChepoAPI
         public Guid user_uuid { get; set; }
         public bool is_in_game { get; set; }
         public string? map_name { get; set; }
-        public Guid server_uuid { get; set; }
+        public Guid? server_uuid { get; set; }
         public List<Guid>? friends { get; set; }
     }
 }
