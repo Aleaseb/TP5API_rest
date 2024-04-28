@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ChepoAPI.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RanksController : ControllerBase
     {

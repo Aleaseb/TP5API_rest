@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace ChepoAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
         private readonly PostgreDbContext _context;
