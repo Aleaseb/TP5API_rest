@@ -11,11 +11,11 @@ namespace ChepoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayerStatsDatasController : ControllerBase
+    public class PlayerStatsController : ControllerBase
     {
         private readonly PostgreDbContext _context;
 
-        public PlayerStatsDatasController(PostgreDbContext context)
+        public PlayerStatsController(PostgreDbContext context)
         {
             _context = context;
         }
