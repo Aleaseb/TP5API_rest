@@ -3,33 +3,44 @@ name: reseau-tp4
 services:
   db:
     build: ./db
+    container_name: db
+    # Lié à l'API dans "appsettings.json", donc attention aux modif
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: user
       POSTGRES_DB: user
     ports:
       - "5432:5432"
+    expose:
+      - 5432
     volumes:
       - ./db/data:/docker-entrypoint-initdb.d
 
-  pgadmin:
-    #image: dpage/pgadmin4:latest
-    build: ./pgadmin
-    environment:
-      PGADMIN_DEFAULT_EMAIL: user@user.com
-      PGADMIN_DEFAULT_PASSWORD: user
-      PGADMIN_CONFIG_SERVER_MODE: 'False'
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+#  pgadmin:
+#    build: ./pgadmin
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: user@user.com
+#      PGADMIN_DEFAULT_PASSWORD: user
+#      PGADMIN_CONFIG_SERVER_MODE: 'False'
+#      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+#    ports:
+#        - "8080:80"
+#    volumes:
+#      - ./pgadmin/servers.json:/pgadmin4/servers.json
+#    depends_on:
+#      - db
+
+  api:
+    build: ./ChepoAPI/ChepoAPI
     ports:
-        - "80:80"
-    volumes:
-      - ./pgadmin/servers.json:/pgadmin4/servers.json
-    depends_on:
-      - db
+      - "80:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+      #- ConnectionString="Server=db;Port=5432;Database=user;Username=user;Password=user"
+      # Si jamais les requêtes fonctionnent, potentiellement mettre ca (voir Program.cs et appsettings.json)
 
   redis:
     build: ./redis
     ports:
       - "6379:6379"
-
-

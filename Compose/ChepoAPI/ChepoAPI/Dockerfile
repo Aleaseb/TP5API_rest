@@ -5,12 +5,18 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
+# Le Dockerfile généré auto a des problèmes :
+#   Il copie pas trop du bon endroit. Sauf si on met le compose et les autres dossiers avec le .sln mais c'est moche
+#   Plus inverser COPY et WORKDIR sinon il trouve pas le main
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["ChepoAPI/ChepoAPI.csproj", "ChepoAPI/"]
+#COPY ["ChepoAPI/ChepoAPI.csproj", "ChepoAPI/"]
+COPY ["ChepoAPI.csproj", "ChepoAPI/"]
 RUN dotnet restore "ChepoAPI/ChepoAPI.csproj"
-COPY . .
+#COPY . .
+#WORKDIR "/src/ChepoAPI"
 WORKDIR "/src/ChepoAPI"
+COPY . .
 RUN dotnet build "ChepoAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
