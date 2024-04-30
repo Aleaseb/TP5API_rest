@@ -11,4 +11,9 @@ namespace ChepoAPI
         public string password { get; set; }
         public string salt { get; set; }
     }
+    public class UsersDataAuth
+    {
+        public string username { get; set; }
+        public string password { get; set; }
+    }
 }
