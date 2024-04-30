@@ -33,10 +33,10 @@ services:
   api:
     build: ./ChepoAPI/ChepoAPI
     ports:
-      - "80:80"
+      - "81:81"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
+      - ASPNETCORE_URLS=http://+:81
       #- ConnectionString="Server=db;Port=5432;Database=user;Username=user;Password=user"
       # Si jamais les requêtes fonctionnent, potentiellement mettre ca (voir Program.cs et appsettings.json)
 
