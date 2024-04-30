@@ -19,7 +19,7 @@ CREATE TABLE servers (
     UUID	uuid	DEFAULT gen_random_uuid()	PRIMARY KEY,
     name	TEXT	UNIQUE	NOT NULL,
     IP TEXT NOT NULL,
-    nb_players INTEGER DEFAULT 0 NOT NULL
+    nb_players INTEGER DEFAULT 0
 );
 INSERT INTO servers (name, IP) VALUES
     ('Server1', '192.10.10.1'),
