@@ -24,7 +24,27 @@ namespace ChepoAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ServerData>>> GetServers()
         {
-            return await _context.servers.ToListAsync();
+            var servers = await _context.servers.ToListAsync();
+            var playerstates = await _context.player_state.ToListAsync();
+
+            if (servers == null || playerstates == null)
+            {
+                return BadRequest();
+            }
+
+            foreach (var server in servers)
+            {
+                server.nb_players = 0;
+                foreach (var player in playerstates)
+                {
+                    if (player.server_uuid == server.uuid)
+                    {
+                        server.nb_players++;
+                    }
+                }
+            }
+
+            return Ok(servers);
         }
 
         // GET: api/Server/5
@@ -32,10 +52,25 @@ namespace ChepoAPI.Controllers
         public async Task<ActionResult<ServerData>> GetServerData(Guid id)
         {
             var serverData = await _context.servers.FindAsync(id);
+            var playerstates = await _context.player_state.ToListAsync();
+
+            if (playerstates == null)
+            {
+                return BadRequest();
+            }
 
             if (serverData == null)
             {
                 return NotFound();
+            }
+
+            serverData.nb_players = 0;
+            foreach (var player in playerstates)
+            {
+                if (player.server_uuid == serverData.uuid)
+                {
+                    serverData.nb_players++;
+                }
             }
 
             return serverData;

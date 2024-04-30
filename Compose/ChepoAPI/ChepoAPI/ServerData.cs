@@ -8,5 +8,6 @@ namespace ChepoAPI
         public Guid uuid { get; set; }
         public string name { get; set; }
         public string ip { get; set; }
+        public int? nb_players { get; set; }
     }
 }
