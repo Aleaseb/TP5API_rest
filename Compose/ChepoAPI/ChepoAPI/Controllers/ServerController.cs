@@ -76,10 +76,83 @@ namespace ChepoAPI.Controllers
             return serverData;
         }
 
+        [HttpGet("mmr/{username}")]
+        public async Task<ActionResult<ServerData>> GetMatchingServer(string username)
+        {
+            var servers = await _context.servers.ToListAsync();
+            var playerstates = await _context.player_state.ToListAsync();
+
+            if (servers == null || playerstates == null)
+            {
+                return BadRequest();
+            }
+
+            foreach (var server in servers)
+            {
+                server.nb_players = 0;
+                foreach (var player in playerstates)
+                {
+                    if (player.server_uuid == server.uuid)
+                    {
+                        server.nb_players++;
+                    }
+                }
+            }
+
+            var user = await _context.users.FirstOrDefaultAsync(user => user.username == username);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var userStats = await _context.player_stats.FindAsync(user.uuid);
+            if (userStats == null)
+            {
+                return NotFound();
+            }
+
+            var userRank = await _context.ranks.FindAsync(userStats.rank_uuid);
+            if (userRank == null)
+            {
+                return NotFound();
+            }
+
+            ServerData? bestServer = null;
+            float closestMmrDistance = 50.0f;
+
+            foreach (var server in servers)
+            {
+                if (server.avg_mmr == null)
+                {
+                    if (closestMmrDistance > 1.5f)
+                    {
+                        bestServer = server;
+                    }
+                }
+                else
+                {
+                    float newMmrDistance = MathF.Abs(server.avg_mmr.Value - userRank.mmr_value);
+                    if (newMmrDistance <= 1.5f && closestMmrDistance > newMmrDistance)
+                    {
+                        bestServer = server;
+                        closestMmrDistance = newMmrDistance;
+                    }
+                }
+
+            }
+
+            if (bestServer == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(bestServer);
+        }
+
         // PUT: api/Server/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutServerData(Guid id, string? name, string? ip)
+        public async Task<IActionResult> PutServerData(Guid id, string? name, string? ip, float? mmr)
         {
             ServerData? serverData = await _context.servers.FindAsync(id);
 
@@ -103,6 +176,10 @@ namespace ChepoAPI.Controllers
             if (ip != null)
             {
                 serverData.ip = ip;
+            }
+            if (mmr != null)
+            {
+                serverData.avg_mmr = mmr;
             }
 
             try
@@ -133,6 +210,7 @@ namespace ChepoAPI.Controllers
             serverData.uuid = Guid.NewGuid();
             serverData.name = name;
             serverData.ip = ip;
+            serverData.avg_mmr = null;
             _context.servers.Add(serverData);
             await _context.SaveChangesAsync();
 

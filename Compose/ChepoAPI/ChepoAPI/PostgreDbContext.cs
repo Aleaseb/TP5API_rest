@@ -11,7 +11,7 @@ namespace ChepoAPI
 
         public DbSet<UsersData> users { get; set; }
         public DbSet<SuccessData> success { get; set; }
-        public DbSet<RankData> rank { get; set; }
+        public DbSet<RankData> ranks { get; set; }
         public DbSet<PlayerStatsData> player_stats { get; set; }
         public DbSet<ServerData> servers { get; set; }
         public DbSet<PlayerStateData> player_state { get; set; }

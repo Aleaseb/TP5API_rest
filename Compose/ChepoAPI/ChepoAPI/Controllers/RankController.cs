@@ -24,14 +24,14 @@ namespace ChepoAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RankData>>> GetRanks()
         {
-            return await _context.rank.ToListAsync();
+            return await _context.ranks.ToListAsync();
         }
 
         // GET: api/Rank/5
         [HttpGet("{id}")]
         public async Task<ActionResult<RankData>> GetRankData(Guid id)
         {
-            var rankData = await _context.rank.FindAsync(id);
+            var rankData = await _context.ranks.FindAsync(id);
 
             if (rankData == null)
             {
@@ -44,9 +44,9 @@ namespace ChepoAPI.Controllers
         // PUT: api/Rank/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRankData(Guid id, string newRankName)
+        public async Task<IActionResult> PutRankData(Guid id, string? newRankName, int? newRankValue)
         {
-            var rankData = await _context.rank.FindAsync(id);
+            var rankData = await _context.ranks.FindAsync(id);
             if (rankData == null)
             {
                 return NotFound();
@@ -58,7 +58,14 @@ namespace ChepoAPI.Controllers
             }
 
             _context.Entry(rankData).State = EntityState.Modified;
-            rankData.name = newRankName;
+            if (newRankName != null)
+            {
+                rankData.name = newRankName;
+            }
+            if (newRankValue != null)
+            {
+                rankData.mmr_value = newRankValue.Value;
+            }
 
             try
             {
@@ -82,12 +89,13 @@ namespace ChepoAPI.Controllers
         // POST: api/Rank
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RankData>> PostRankData(string rankName)
+        public async Task<ActionResult<RankData>> PostRankData(string rankName, int rankValue)
         {
             RankData rankData = new RankData();
             rankData.uuid = Guid.NewGuid();
             rankData.name = rankName;
-            _context.rank.Add(rankData);
+            rankData.mmr_value = rankValue;
+            _context.ranks.Add(rankData);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRankData", new { id = rankData.uuid }, rankData);
@@ -97,13 +105,13 @@ namespace ChepoAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRankData(Guid id)
         {
-            var rankData = await _context.rank.FindAsync(id);
+            var rankData = await _context.ranks.FindAsync(id);
             if (rankData == null)
             {
                 return NotFound();
             }
 
-            _context.rank.Remove(rankData);
+            _context.ranks.Remove(rankData);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -111,7 +119,7 @@ namespace ChepoAPI.Controllers
 
         private bool RankDataExists(Guid id)
         {
-            return _context.rank.Any(e => e.uuid == id);
+            return _context.ranks.Any(e => e.uuid == id);
         }
     }
 }

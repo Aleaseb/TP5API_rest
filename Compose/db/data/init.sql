@@ -19,7 +19,8 @@ CREATE TABLE servers (
     UUID	uuid	DEFAULT gen_random_uuid()	PRIMARY KEY,
     name	TEXT	UNIQUE	NOT NULL,
     IP TEXT NOT NULL,
-    nb_players INTEGER DEFAULT 0
+    nb_players INTEGER DEFAULT 0,
+    avg_mmr FLOAT
 );
 INSERT INTO servers (name, IP) VALUES
     ('Server1', '192.10.10.1'),
@@ -40,15 +41,16 @@ INSERT INTO success (name, description, image) VALUES
 
 CREATE TABLE ranks (
     UUID	uuid	DEFAULT gen_random_uuid()	PRIMARY KEY,
-    name	TEXT	UNIQUE	NOT NULL
+    name	TEXT	UNIQUE	NOT NULL,
+    mmr_value INTEGER DEFAULT -1 NOT NULL
 );
-INSERT INTO ranks (name) VALUES
-	('Copper'),
-    ('Bronze'),
-	('Silver'),
-	('Gold'),
-	('Platinium'),
-	('Diamond');
+INSERT INTO ranks (name, mmr_value) VALUES
+	('Copper', 1),
+    ('Bronze', 2),
+	('Silver', 3),
+	('Gold', 4),
+	('Platinium', 5),
+	('Diamond', 6);
 
 
 CREATE TABLE player_stats (
