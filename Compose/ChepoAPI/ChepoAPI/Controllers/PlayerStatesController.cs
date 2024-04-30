@@ -59,6 +59,7 @@ namespace ChepoAPI.Controllers
             }
 
             _context.Entry(playerStateData).State = EntityState.Modified;
+            var previousServerId = playerStateData.server_uuid;
             if (isInGame != null)
             {
                 playerStateData.is_in_game = isInGame.Value;
@@ -70,6 +71,7 @@ namespace ChepoAPI.Controllers
             if (serverUuid != null)
             {
                 playerStateData.server_uuid = serverUuid.Value;
+                await ComputeServerMMR(playerStateData.server_uuid.Value);
             }
             if (newFriends != null)
             {
@@ -81,6 +83,11 @@ namespace ChepoAPI.Controllers
                 {
                     playerStateData.friends.Add(newFriend);
                 }
+            }
+
+            if (previousServerId != null)
+            {
+                await ComputeServerMMR(previousServerId.Value);
             }
 
             try
@@ -102,12 +109,56 @@ namespace ChepoAPI.Controllers
             return NoContent();
         }
 
+        private async Task<int> ComputeServerMMR(Guid serverUid)
+        {
+            var server = await _context.servers.FindAsync(serverUid);
+            var playerStates = await _context.player_state.ToListAsync();
+
+            if (server == null || playerStates == null)
+            {
+                return 0;
+            }
+
+            server.avg_mmr = 0.0f;
+            int nbPlayers = 0;
+            foreach (var playerState in playerStates)
+            {
+                var playerStat = await _context.player_stats.FindAsync(playerState.user_uuid);
+                if (playerStat == null)
+                {
+                    continue;
+                }
+                var playerRank = await _context.ranks.FindAsync(playerStat.rank_uuid);
+                if (playerRank == null)
+                {
+                    continue;
+                }
+
+                if (playerState.server_uuid != null && playerState.server_uuid == serverUid)
+                {
+                    nbPlayers++;
+                    server.avg_mmr += playerRank.mmr_value;
+                }
+            }
+
+            if (nbPlayers > 0)
+            {
+                server.avg_mmr /= nbPlayers;
+            }
+
+            return 1;
+        }
+
         // POST: api/PlayerStates
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<PlayerStateData>> PostPlayerStateData(PlayerStateData playerStateData)
         {
             _context.player_state.Add(playerStateData);
+            if (playerStateData.server_uuid != null)
+            {
+                await ComputeServerMMR(playerStateData.server_uuid.Value);
+            }
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPlayerStateData", new { id = playerStateData.user_uuid }, playerStateData);
@@ -123,8 +174,15 @@ namespace ChepoAPI.Controllers
                 return NotFound();
             }
 
+            var serverId = playerStateData.server_uuid;
             _context.player_state.Remove(playerStateData);
             await _context.SaveChangesAsync();
+
+            if (serverId != null)
+            {
+                await ComputeServerMMR(serverId.Value);
+                await _context.SaveChangesAsync();
+            }
 
             return NoContent();
         }
