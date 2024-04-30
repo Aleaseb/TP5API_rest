@@ -155,11 +155,14 @@ namespace ChepoAPI.Controllers
         public async Task<ActionResult<PlayerStateData>> PostPlayerStateData(PlayerStateData playerStateData)
         {
             _context.player_state.Add(playerStateData);
+
+            await _context.SaveChangesAsync();
+
             if (playerStateData.server_uuid != null)
             {
                 await ComputeServerMMR(playerStateData.server_uuid.Value);
+                await _context.SaveChangesAsync();
             }
-            await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPlayerStateData", new { id = playerStateData.user_uuid }, playerStateData);
         }
