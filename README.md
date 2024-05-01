@@ -7,5 +7,6 @@
 - "docker compose up -d" 
 - http://localhost:81/swagger
 
-username : user
-password : user
+# How to connect in game
+- username: user
+- password: user
