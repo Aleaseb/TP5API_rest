@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using ChepoAPI.Interfaces;
 
 namespace ChepoAPI.Controllers
 {
@@ -16,17 +17,27 @@ namespace ChepoAPI.Controllers
     public class SuccessController : ControllerBase
     {
         private readonly PostgreDbContext _context;
+        private readonly ICacheService _cacheService;
 
-        public SuccessController(PostgreDbContext context)
+        public SuccessController(PostgreDbContext context, ICacheService cacheService)
         {
             _context = context;
+            _cacheService = cacheService;
         }
 
         // GET: api/Success
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SuccessData>>> Getsuccess()
         {
-            return await _context.success.ToListAsync();
+            var cacheData = _cacheService.GetData<List<SuccessData>>("success");
+            if (cacheData == null)
+            {
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                cacheData = await _context.success.ToListAsync();
+                _cacheService.SetData("success", cacheData, expirationTime);
+            }
+
+            return cacheData;
         }
 
         // GET: api/Success/5

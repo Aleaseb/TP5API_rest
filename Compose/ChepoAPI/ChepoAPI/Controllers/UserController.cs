@@ -24,35 +24,32 @@ namespace ChepoAPI.Controllers
         public async Task<ActionResult<IEnumerable<UsersData>>> GetUsers()
         {
             var cacheData = _cacheService.GetData<List<UsersData>>("users");
-            if (cacheData != null)
+            if (cacheData == null)
             {
-                return cacheData;
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                var dataToCache = await _context.users.ToListAsync();
+                _cacheService.SetData("users", dataToCache, expirationTime);
             }
 
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-            var dataToCache = await _context.users.ToListAsync();
-            _cacheService.SetData("users", dataToCache, expirationTime);
-
-            return dataToCache;
+            return cacheData;
         }
 
         [HttpGet("{username}")]
         public async Task<ActionResult<UsersData>> GetUser(string username)
         {
             var cacheData = _cacheService.GetData<UsersData>(username);
-            if (cacheData != null)
+            if (cacheData == null)
             {
-                return cacheData;
+                var user = await _context.users.FirstOrDefaultAsync(user => user.username == username);
+                if (user == null)
+                {
+                    return NotFound();
+                }
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                _cacheService.SetData(username, user, expirationTime);
             }
 
-            var user = await _context.users.FirstOrDefaultAsync(user => user.username == username);
-            if (user == null)
-            {
-                return NotFound();
-            }
-            var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
-            _cacheService.SetData(username, user, expirationTime);
-            return user;
+            return cacheData;
         }
 
         [HttpPost("login")]
@@ -89,7 +86,7 @@ namespace ChepoAPI.Controllers
             if (token == null)
             {
                 token = _tokenService.GenerateToken(user);
-                var expirationTime = DateTimeOffset.Now.AddMinutes(1440.0);
+                var expirationTime = DateTimeOffset.Now.AddMinutes(0.5);
                 _cacheService.SetData(user.uuid.ToString(), token, expirationTime);
             }
 
