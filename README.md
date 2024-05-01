@@ -5,3 +5,4 @@
 - Go inside directory containing compose.yaml
 - Open a terminal in that directory
 - "docker compose up -d" 
+- http://localhost:81/swagger
