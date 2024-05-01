@@ -29,12 +29,12 @@ namespace ChepoAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<SuccessData>>> Getsuccess()
         {
-            var cacheData = _cacheService.GetData<List<SuccessData>>("success");
+            var cacheData = _cacheService.GetData<List<SuccessData>>("successList");
             if (cacheData == null)
             {
                 var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
                 cacheData = await _context.success.ToListAsync();
-                _cacheService.SetData("success", cacheData, expirationTime);
+                _cacheService.SetData("successList", cacheData, expirationTime);
             }
 
             return cacheData;
@@ -44,21 +44,42 @@ namespace ChepoAPI.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<SuccessData>> GetSuccessData(Guid id)
         {
-            var successData = await _context.success.FindAsync(id);
+            var cacheData = _cacheService.GetData<SuccessData>("successData" + id.ToString());
+            if (cacheData == null)
+            {
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                cacheData = await _context.success.FindAsync(id);
+                _cacheService.SetData("successData" + id.ToString(), cacheData, expirationTime);
+            }
 
-            if (successData == null)
+            if (cacheData == null)
             {
                 return NotFound();
             }
 
-            return successData;
+            return cacheData;
         }
 
         [HttpPost("grant")]
         public async Task<ActionResult> GrantSuccessToPlayer(Guid userId, Guid successId)
         {
-            var user = await _context.users.FindAsync(userId);
-            var success = await _context.success.FindAsync(successId);
+            var userIdString = userId.ToString();
+            var user = _cacheService.GetData<UsersData>(userIdString);
+            if (user == null)
+            {
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                user = await _context.users.FindAsync(userId);
+                _cacheService.SetData(userIdString, user, expirationTime);
+            }
+
+            var successIdString = successId.ToString();
+            var success = _cacheService.GetData<SuccessData>(successIdString);
+            if(success == null)
+            {
+                var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+                success = await _context.success.FindAsync(successId);
+                _cacheService.SetData(successIdString, success, expirationTime);
+            }
 
             if (user == null || success == null)
             {
