@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+//using ChepoAPI.Services;
 
 namespace ChepoAPI.Controllers
 {
@@ -14,7 +15,8 @@ namespace ChepoAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly PostgreDbContext _context;
-
+        //private readonly ITokenService _tokenService;
+        
         public UsersController(PostgreDbContext context)
         {
             _context = context;
@@ -37,6 +39,30 @@ namespace ChepoAPI.Controllers
             }
 
             return user;
+        }
+        
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login(string username, string password)
+        {
+            var user = await _context.users.FirstOrDefaultAsync(u => u.username == username);
+
+            if (user == null)
+            {
+                return NotFound("Utilisateur introuvable");
+            }
+
+            /*// Hash the provided password with the user's salt and compare it with the stored password
+            var hashedPassword = HashingService.HashPassword(loginModel.Password, user.Salt);
+
+            if (user.Password != hashedPassword)
+            {
+                return Unauthorized("Mot de passe incorrect");
+            }*/
+
+            // If the password is correct, generate JWT token
+            //var token = _tokenService.GenerateToken(user);
+
+            return Ok("Success"/*token*/);
         }
 
     }
