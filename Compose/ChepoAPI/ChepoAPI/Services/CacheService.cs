@@ -6,12 +6,17 @@ namespace ChepoAPI.Services
 {
     public class CacheService : ICacheService
     {
+        private readonly IConfiguration _configuration;
+        private readonly ConnectionMultiplexer _redis;
         private IDatabase _db;
-        public CacheService() => ConfigureRedis();
 
-        private void ConfigureRedis()
+        public CacheService(IConfiguration configuration)
         {
-            _db = ConnectionMultiplexer.Connect("localhost").GetDatabase(); //ConnectionHelper.Connection.GetDatabase();
+            _configuration = configuration;
+            string redisUrl = _configuration["RedisURL"];
+            _redis = ConnectionMultiplexer.Connect(redisUrl);
+
+            _db = _redis.GetDatabase();
         }
 
         public T GetData<T>(string key)
@@ -28,6 +33,12 @@ namespace ChepoAPI.Services
         {
             TimeSpan expiryTime = expirationTime.DateTime.Subtract(DateTime.Now);
             var isSet = _db.StringSet(key, JsonConvert.SerializeObject(value), expiryTime);
+            return isSet;
+        }
+
+        public bool SetData<T>(string key, T value)
+        {
+            var isSet = _db.StringSet(key, JsonConvert.SerializeObject(value));
             return isSet;
         }
 
