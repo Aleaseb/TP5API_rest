@@ -1,12 +1,5 @@
-﻿using ChepoAPI;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
 using ChepoAPI.Services;
 using ChepoAPI.Interfaces;
 
@@ -61,19 +54,30 @@ namespace ChepoAPI.Controllers
             _cacheService.SetData(username, user, expirationTime);
             return user;
         }
-        
+
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login(string username, string password)
         {
-            var user = await _context.users.FirstOrDefaultAsync(u => u.username == username);
 
+            UsersData user = _cacheService.GetData<UsersData>(username);
             if (user == null)
             {
-                return NotFound("Utilisateur introuvable");
+                user = await _context.users.FirstOrDefaultAsync(u => u.username == username);
+                _cacheService.SetData(username, user);
+
+                if (user == null)
+                {
+                    return NotFound("Utilisateur introuvable");
+                }
             }
 
             // Hash the provided password with the user's salt and compare it with the stored password
-            var hashedPassword = HashingService.HashPassword(user.password, user.salt);
+            String hashedPassword = _cacheService.GetData<String>(password);
+            if (hashedPassword == null)
+            {
+                hashedPassword = HashingService.HashPassword(user.password, user.salt);
+                _cacheService.SetData(password, hashedPassword);
+            }
 
             if (password != hashedPassword)
             {
@@ -81,13 +85,17 @@ namespace ChepoAPI.Controllers
             }
 
             // If the password is correct, generate JWT token
-            var token = _tokenService.GenerateToken(user);
+            string token = _cacheService.GetData<string>(user.uuid.ToString());
+            if (token == null)
+            {
+                token = _tokenService.GenerateToken(user);
+                _cacheService.SetData(user.uuid.ToString(), token);
+            }
 
             return Ok(new
             {
                 token
             });
         }
-
     }
 }

@@ -52,5 +52,4 @@ namespace ChepoAPI.Services
             return false;
         }
     }
-    
 }

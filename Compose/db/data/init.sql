@@ -7,6 +7,7 @@ CREATE TABLE users (
 	PRIMARY KEY(UUID)
 );
 INSERT INTO users (username, email, password, salt) VALUES
+    ('user', 'user', 'user', 'user'),
     ('Samuel', 'Samuelgmail', 'passe-muraille', 'sel'),
     ('Julien', 'Julienyahooooo', 'passe-partout', 'sucre'),
     ('Sebastien', 'Sebastienorange', 'passe_de_combat', 'poivre'),
