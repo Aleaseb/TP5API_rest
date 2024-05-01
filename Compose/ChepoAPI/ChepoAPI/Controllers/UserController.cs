@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using ChepoAPI.Interfaces;
 using ChepoAPI.Services;
-using ChepoAPI.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ChepoAPI.Controllers
 {
@@ -53,6 +54,21 @@ namespace ChepoAPI.Controllers
             var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
             _cacheService.SetData(username, user, expirationTime);
             return user;
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<UsersData>> PostUserData(string username, string email, string password, string salt)
+        {
+            UsersData userData = new UsersData();
+            userData.uuid = Guid.NewGuid();
+            userData.username = username;
+            userData.email = email;
+            userData.password = password;
+            userData.salt = salt;
+            _context.users.Add(userData);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUser", new { username = username }, userData);
         }
 
         [HttpPost("login")]
