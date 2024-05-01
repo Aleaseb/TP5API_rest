@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using ChepoAPI.Services;
+using ChepoAPI.Services;
 
 namespace ChepoAPI.Controllers
 {
@@ -15,11 +15,12 @@ namespace ChepoAPI.Controllers
     public class UsersController : ControllerBase
     {
         private readonly PostgreDbContext _context;
-        //private readonly ITokenService _tokenService;
+        private readonly ITokenService _tokenService;
         
-        public UsersController(PostgreDbContext context)
+        public UsersController(PostgreDbContext context, ITokenService tokenService)
         {
             _context = context;
+            _tokenService = tokenService;
         }
 
         [HttpGet()]
@@ -51,18 +52,18 @@ namespace ChepoAPI.Controllers
                 return NotFound("Utilisateur introuvable");
             }
 
-            /*// Hash the provided password with the user's salt and compare it with the stored password
-            var hashedPassword = HashingService.HashPassword(loginModel.Password, user.Salt);
+            // Hash the provided password with the user's salt and compare it with the stored password
+            var hashedPassword = HashingService.HashPassword(user.password, user.salt);
 
-            if (user.Password != hashedPassword)
+            if (password != hashedPassword)
             {
-                return Unauthorized("Mot de passe incorrect");
-            }*/
+                return Unauthorized("Mot de passe incorrect " + hashedPassword.ToString());
+            }
 
             // If the password is correct, generate JWT token
-            //var token = _tokenService.GenerateToken(user);
+            var token = _tokenService.GenerateToken(user);
 
-            return Ok("Success"/*token*/);
+            return Ok("Success " + token);
         }
 
     }
