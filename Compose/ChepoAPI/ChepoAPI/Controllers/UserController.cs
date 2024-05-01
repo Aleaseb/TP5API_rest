@@ -89,7 +89,8 @@ namespace ChepoAPI.Controllers
             if (token == null)
             {
                 token = _tokenService.GenerateToken(user);
-                _cacheService.SetData(user.uuid.ToString(), token);
+                var expirationTime = DateTimeOffset.Now.AddMinutes(1440.0);
+                _cacheService.SetData(user.uuid.ToString(), token, expirationTime);
             }
 
             return Ok(new
