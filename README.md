@@ -10,7 +10,3 @@
 # How to connect in game
 - username: user
 - password: user
-
-# Which Server to use
-- TestServer
-- DO NOT USER SERVER 1 OR SERVER 2
