@@ -57,7 +57,7 @@ namespace ChepoAPI.Controllers
 
             if (password != hashedPassword)
             {
-                return Unauthorized("Mot de passe incorrect " + hashedPassword.ToString());
+                return Unauthorized("Mot de passe incorrect " + hashedPassword);
             }
 
             // If the password is correct, generate JWT token
