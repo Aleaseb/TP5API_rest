@@ -7,10 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+using System.Runtime.InteropServices.JavaScript;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.IdentityModel.Tokens;
@@ -67,14 +68,16 @@ namespace ChepoAPI.Controllers
         private readonly IUserService _userService;
 
         public AuthController(IConfiguration config, IUserService userService) { 
-        _config = config;
+            _config = config;
             _userService = userService;
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UsersDataAuth model)
         {
-            var user = _userService.Authenticate(model.username, model.password);
+            byte[] HashedPassword = Encoding.Unicode.GetBytes(model.password);
+            
+            var user = _userService.Authenticate(model.username, HashedPassword);
             if (user == null)
                 return Unauthorized();
 
@@ -97,6 +100,14 @@ namespace ChepoAPI.Controllers
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token)
             });
+            return CreatedAtAction("GiveToken", new { token = new JwtSecurityTokenHandler().WriteToken(token) }, new JwtSecurityTokenHandler().WriteToken(token));
+
+        }
+
+        [HttpGet("{token}")]
+        public async Task<ActionResult<string>> GiveToken(string token)
+        {
+            return token;
         }
     }
 }

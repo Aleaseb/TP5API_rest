@@ -1,37 +1,53 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChepoAPI.Services
 {
     public interface IUserService
     {
-        UsersData Authenticate(string username, string password);
+        UsersData Authenticate(string username, byte[] HashedPassword);
     }
     public class UserService: IUserService
     {
         private readonly PostgreDbContext _context;
         public UserService(PostgreDbContext context) {  _context = context; }
 
-        public UsersData Authenticate(string username, string password)
+        public UsersData Authenticate(string username, byte[] HashedPassword)
         {
-            var user= _context.users.FirstOrDefault(u=> u.username == username);
-            if (user != null && VerifyPasswordHash(password, user.password, user.salt))
-            {
-                return user; 
-            }
+            UsersData user = _context.users.FirstOrDefault(u => u.username == username) ?? null;
+            if (user == null)
+                return null;
+            
+            // Dans l'idéal, le mot de psse serait déjà stocké hashé.
+            if (!VerifyPasswordHash(HashedPassword, user.password, user.salt))
+                return null; 
 
-            return null;
+            return user;
         }
-        private static bool VerifyPasswordHash(string password, string storedHash, string storedSalt)
+        private static bool VerifyPasswordHash(byte[] HashedPassword, string storedHash, string storedSalt)
         {
-            using var hmac = new HMACSHA512(Convert.FromBase64String(storedSalt));
-
-            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            // A ce niveau de sécurité, nous sommes conscient que cela n'est pas du tout le plus optimal.
+            /*using var hmac = new HMACSHA512(Convert.FromBase64String(storedSalt));
+            var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(storedHash));*/
+            byte[] computedHash;
+            using (var sha512 = SHA512.Create())
+            {
+                byte[] storedpsswd = Encoding.Unicode.GetBytes(storedHash);
+                byte[] storedsaltbyte = Encoding.Unicode.GetBytes(storedSalt);
+                byte[] concated = storedpsswd.Concat<byte>(storedsaltbyte).ToArray();
+                computedHash = sha512.ComputeHash(concated);
+                
+            }
+            if (HashedPassword.Length != computedHash.Length)
+                return false;
 
             for (int i = 0; i < computedHash.Length; i++)
             {
-                if (computedHash[i] != storedHash[i])
+                if (computedHash[i] != HashedPassword[i])
                 {
                     return false; // Hash mismatch, password incorrect
                 }

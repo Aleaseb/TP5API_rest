@@ -7,7 +7,7 @@ CREATE TABLE users (
 	PRIMARY KEY(UUID)
 );
 INSERT INTO users (username, email, password, salt) VALUES
-    ('Samuel', 'Samuelgmail', 'passe-muraille', 'sel'),
+    ('samuel', 'Samuelgmail', 'passe-muraille', 'sel'),
     ('Julien', 'Julienyahooooo', 'passe-partout', 'sucre'),
     ('Sebastien', 'Sebastienorange', 'passe_de_combat', 'poivre'),
     ('Mathieu', 'Mathieujsp', 'passe temps', 'epice'),
@@ -58,7 +58,7 @@ CREATE TABLE player_stats (
 );
 INSERT INTO player_stats (user_uuid, kill, death, rank_uuid) VALUES
     ((SELECT UUID FROM users WHERE username = 'Julien'), 0, 0, (SELECT UUID FROM ranks WHERE name = 'Diamond')),
-	((SELECT UUID FROM users WHERE username = 'Samuel'), -1, 2, (SELECT UUID FROM ranks WHERE name = 'Bronze')),
+	((SELECT UUID FROM users WHERE username = 'samuel'), -1, 2, (SELECT UUID FROM ranks WHERE name = 'Bronze')),
 	((SELECT UUID FROM users WHERE username = 'Thomas'), 15, 20, (SELECT UUID FROM ranks WHERE name = 'Silver')),
 	((SELECT UUID FROM users WHERE username = 'Virginie'), 10, 10, (SELECT UUID FROM ranks WHERE name = 'Gold')),
 	((SELECT UUID FROM users WHERE username = 'Mathieu'), -5, -10, (SELECT UUID FROM ranks WHERE name = 'Platinium')),
