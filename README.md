@@ -6,3 +6,6 @@
 - Open a terminal in that directory
 - "docker compose up -d" 
 - http://localhost:81/swagger
+
+username : user
+password : user
