@@ -22,9 +22,6 @@ CREATE TABLE servers (
     nb_players INTEGER DEFAULT 0,
     avg_mmr FLOAT
 );
-INSERT INTO servers (name, IP) VALUES
-    ('Server1', '192.10.10.1'),
-    ('Server2', '192.10.10.2');
 
 
 CREATE TABLE success (
