@@ -34,6 +34,7 @@ CREATE TABLE success (
     image	TEXT	NOT NULL
 );
 INSERT INTO success (name, description, image) VALUES
+    ('1stLogin', 'se login une premiere fois', 'png'),
     ('100-kill', 'tuer 100 personnes', 'png'),
     ('100-days-login', 'jouer 100 jours à la suite', 'gif'),
     ('1$', 'dépenser 1$', 'jpg');
