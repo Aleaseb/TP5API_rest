@@ -12,7 +12,7 @@ namespace ChepoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class SuccessController : ControllerBase
     {
         private readonly PostgreDbContext _context;
