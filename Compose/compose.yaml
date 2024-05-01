@@ -1,6 +1,7 @@
 name: reseau-tp4
 
 services:
+
   db:
     build: ./db
     container_name: db
@@ -15,20 +16,20 @@ services:
       - 5432
     volumes:
       - ./db/data:/docker-entrypoint-initdb.d
-
-#  pgadmin:
-#    build: ./pgadmin
-#    environment:
-#      PGADMIN_DEFAULT_EMAIL: user@user.com
-#      PGADMIN_DEFAULT_PASSWORD: user
-#      PGADMIN_CONFIG_SERVER_MODE: 'False'
-#      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
-#    ports:
-#        - "8080:80"
-#    volumes:
-#      - ./pgadmin/servers.json:/pgadmin4/servers.json
-#    depends_on:
-#      - db
+  #
+  # pgadmin:
+  #   build: ./pgadmin
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: user@user.com
+  #     PGADMIN_DEFAULT_PASSWORD: user
+  #     PGADMIN_CONFIG_SERVER_MODE: 'False'
+  #     PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+  #   ports:
+  #       - "8000:8000"
+  #   volumes:
+  #     - ./pgadmin/servers.json:/pgadmin4/servers.json
+  #   depends_on:
+  #     - db
 
   api:
     build: ./ChepoAPI/ChepoAPI

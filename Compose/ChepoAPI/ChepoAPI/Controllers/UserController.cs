@@ -8,6 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using ChepoAPI.Services;
+using ChepoAPI.Interfaces;
 
 namespace ChepoAPI.Controllers
 {
@@ -17,22 +18,51 @@ namespace ChepoAPI.Controllers
     {
         private readonly PostgreDbContext _context;
         private readonly ITokenService _tokenService;
-        
-        public UsersController(PostgreDbContext context, ITokenService tokenService)
+        //private readonly ICacheService _cacheService;
+
+        public UsersController(PostgreDbContext context, ITokenService tokenService/*, ICacheService cacheService*/)
         {
             _context = context;
             _tokenService = tokenService;
+            //_cacheService = cacheService;
         }
 
         [HttpGet()]
         public async Task<ActionResult<IEnumerable<UsersData>>> GetUsers()
         {
+            //var cacheData = _cacheService.GetData<List<UsersData>>("users");
+            //if (cacheData != null)
+            //{
+            //    return cacheData;
+            //}
+
+            //var expirationTime = DateTimeOffset.Now.AddMinutes(5.0);
+            //var dataToCache = await _context.users.ToListAsync();
+            //_cacheService.SetData("users", dataToCache, expirationTime);
+
+            //return dataToCache;
+
             return await _context.users.ToListAsync();
         }
 
         [HttpGet("{username}")]
         public async Task<ActionResult<UsersData>> GetUser(string username)
         {
+            //var cacheData = _cacheService.GetData<UsersData>(username);
+            //if (cacheData != null)
+            //{
+            //    return cacheData;
+            //}
+
+            //var user = await _context.users.FirstOrDefaultAsync(user => user.username == username);
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
+            //var expirationTime = DateTimeOffset.Now.AddMinutes(int.MaxValue);
+            //_cacheService.SetData(username, user, expirationTime);
+            //return user;
+
             var user = await _context.users.FirstOrDefaultAsync(user => user.username == username);
 
             if (user == null)
