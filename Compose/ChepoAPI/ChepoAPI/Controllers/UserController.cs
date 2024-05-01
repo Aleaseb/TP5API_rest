@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 using ChepoAPI.Services;
@@ -57,13 +58,16 @@ namespace ChepoAPI.Controllers
 
             if (password != hashedPassword)
             {
-                return Unauthorized("Mot de passe incorrect " + hashedPassword);
+                return Unauthorized("Mot de passe incorrect" + hashedPassword);
             }
 
             // If the password is correct, generate JWT token
             var token = _tokenService.GenerateToken(user);
 
-            return Ok("Success " + token);
+            return Ok(new
+            {
+                token
+            });
         }
 
     }

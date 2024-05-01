@@ -6,11 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ChepoAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class SuccessController : ControllerBase
     {
         private readonly PostgreDbContext _context;
@@ -39,6 +41,20 @@ namespace ChepoAPI.Controllers
             }
 
             return successData;
+        }
+
+        [HttpPost("grant")]
+        public async Task<ActionResult> GrantSuccessToPlayer(Guid userId, Guid successId)
+        {
+            var user = await _context.users.FindAsync(userId);
+            var success = await _context.success.FindAsync(successId);
+
+            if (user == null || success == null)
+            {
+                return BadRequest("Utilisateur ou succès introuvable !");
+            }
+
+            return Ok("Succès accordé !");
         }
 
         // PUT: api/Success/5
