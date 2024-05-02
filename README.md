@@ -11,5 +11,9 @@
 - username: user
 - password: user
 
+OR 
+- username: Samuel
+- password: passe-muraille
+
 # DO NOT USE SERVER 1 & 2
 - TestServer is ok
