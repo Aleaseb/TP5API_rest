@@ -12,3 +12,4 @@
 - password: user
 
 # DO NOT USE SERVER 1 & 2
+- TestServer is ok
