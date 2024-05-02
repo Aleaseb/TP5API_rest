@@ -10,3 +10,5 @@
 # How to connect in game
 - username: user
 - password: user
+
+# DO NOT USE SERVER 1 & 2
